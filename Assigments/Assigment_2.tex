@@ -1,0 +1,675 @@
+\documentclass[12 pt]{article}
+
+% Packages for mathematical symbols and equations
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{setspace}
+\usepackage{acro}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{physics}
+\usepackage{cancel}
+\usepackage{empheq}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage[english]{babel}
+\usepackage{bbold}
+\usepackage{amssymb}
+\usepackage{titlesec}
+\usepackage{adjustbox}
+\usepackage{float}
+\numberwithin{equation}{section}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{wrapfig}
+\usepackage{relsize}
+\usepackage[letterpaper ,top=1in,bottom=1in,left=1in,right=1in,marginparwidth=1.75cm]{geometry}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usetikzlibrary{calc,trees,positioning,arrows,chains,shapes.geometric,%
+    decorations.pathreplacing,decorations.pathmorphing,shapes,%
+    matrix,shapes.symbols}
+\include{acronyms}
+%\geometry{top=1.3in,bottom=1.3in}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+  urlcolor=black}
+
+
+
+% Set page margins
+
+\title{Quantum Mechanics II\\
+Assignment II}
+\author{Gabriel Balarezo}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 7.11}
+Find the lowest bound on the ground state of hydrogen you can get using a gaussian trial wave
+function 
+\begin{equation}
+  \psi(\mathbf{r}) = A e^{-br^2},
+\end{equation}
+where $A$ is determined by normalisation and $b$ is an adjustable parameter. \emph{Answer:}
+-11.5 eV.
+\subsection*{Solution:}
+First of all, let's write down the Hamiltonian for the Hydrogen
+\begin{equation}
+  H_{Bohr} = -\frac{\hbar^2}{2m}\nabla^2 - \frac{e^2}{4\pi \epsilon_0}\frac{1}{r}
+\end{equation}
+Now, we have to follow the next steps to addres this problem 
+\begin{enumerate}
+  \item Normalise our trial wavefunction: 
+    \begin{align}
+      1 = \big<\psi\big|\psi\big> &= \big|A\big|^2\int e^{-2br^2} r^2 sin\theta dr d\theta
+      d\phi\nonumber \\
+    &= \big|A\big|^2\int_{0}^{\infty}e^{-2br^2}r^2dr \underbrace{\int_{0}^{\pi} sin\theta d\theta 
+    \int_{0}^{2\pi}d\phi}_{4\pi}\nonumber\\
+    &= \big|A\big|^2 4\pi \int_{0}^{\infty} e^{-2br^2}r^2 dr \nonumber
+      \intertext{Using } \Aboxed{\int_{0}^{+\infty} r^m & e^{-ar^2}  dr  = 
+      \frac{\Gamma\left(\frac{m+1}{2}\right)}{2a^{\frac{m+1}{2}}}}\label{eq3} \\
+      1 &=4\pi \big|A\big|^2\frac{1}{4}\sqrt{\frac{\pi}{(2b)^3}} = \big|A\big|^2 \left(
+      \frac{\pi}{2b}\right)^{3/2}\nonumber\\
+    \Rightarrow A &= \left(\frac{2b}{\pi}\right)^{3/4}
+    \end{align}
+  \item Compute $\big<\psi\big|\hat{T}\big|\psi\big>$
+\begin{equation}
+  \label{eq5}
+  \big<\psi\big|\hat{T}\big|\psi\big> = \int\psi\left(-\frac{\hbar^2}{2m}\nabla^2\psi\right)
+  dr\,sin\theta \,d\theta\, d\phi
+\end{equation}
+     Firs we need to compute 
+    \begin{equation}
+      \label{eq6}
+      \begin{aligned}
+        \nabla^2 \psi(\mathbf{r}) &= \frac{1}{r^2}\frac{d}{dr}\left(r^2\frac{d}{dr}\psi\right),
+        \quad \text{no
+        angular dependence!}\\
+                      &= A \frac{1}{r^2}\frac{d}{dr}\left(- 2b\,r^3\,e^{-2br^2}\right)\\
+                      &= -2b\,A\frac{1}{r^2}\left(3r^2 - 2r^4 \right) e^{-2br^2}\\
+                      &= \frac{-2b}{r^2}\left(3r^2 - 2r^4 \right) \psi(\mathbf{r})
+      \end{aligned}
+    \end{equation}
+  Then, \autoref{eq5} becomes 
+  \begin{equation}
+    \label{eq7}
+    \begin{aligned}
+      \big<\psi\big|\hat{T}\big|\psi\big> &= -\frac{\hbar^2}{2m}\big|A\big|^2(-2b)4\pi
+      \int_{0}^{\infty}\left(3r^2 - 2br^4 \right) e^{-2br^2} dr\\
+    \end{aligned}
+  \end{equation}
+  We can solve the integral using \autoref{eq3}, then
+  \begin{equation}
+    \label{eq8}
+    \begin{aligned}
+      \big<\psi\big|\hat{T}\big|\psi\big> &= \frac{4\hbar^2\pi\,b}{m}
+      \left(\frac{2b}{\pi}\right)^{3/2}\left[3\frac{1}{8b}\sqrt{\frac{\pi}{2b}}- 2b
+      \frac{3}{32b^2}\sqrt{\frac{\pi}{2b}}\right]\\
+                                          &=\frac{4\hbar^2\pi\,b}{m}\left(\frac{2b}{\pi}\right)
+                                          \left(\frac{3}{8b}-\frac{3}{16b}\right)\\
+                                          &= \frac{4\hbar^2\pi\,b}{m}\left(\frac{2b}{\pi}\right)
+                                          \left(\frac{3}{16b}\right) = \boxed{
+                                          \frac{3\hbar^2\,b}{2m} = \big<\hat{T}(b)\big>}
+    \end{aligned}
+  \end{equation}
+\item Compute $\big<\psi\big|\hat{V}\big|\psi\big>$
+  \begin{equation}\label{eq9}
+    \begin{aligned}
+    \big<\psi\big|\hat{V}\big|\psi\big> &= -\frac{e^2}{4\pi\epsilon_0}\big|A\big|^2 4\pi 
+    \int_{0}^{\infty}e^{-2br^2}\frac{1}{r}r^2\,dr\\
+                                        &= -\frac{e^2}{4\pi\epsilon_0}\left(\frac{2b}{\pi}\right)^{3/2}
+                                        \left(\frac{4\pi}{4b}\right)\\
+                                        &=\boxed{-\frac{e^2}{4\pi\epsilon_0}2\sqrt{\frac{2b}{\pi}}
+                                        =\big<\hat{V}(b)\big>}
+    \end{aligned}
+  \end{equation}
+\item Compute $\big<\hat{H}\big> = \big<\hat{T}(b)\big> + \big<\hat{V}(b)\big> = E_{gs}(b)$
+
+Using the results from \autoref{eq8} and \autoref{eq9} write 
+\begin{equation}\label{eq10}
+  \big<\hat{H}\big> = \frac{3\hbar^2\,b}{2m} -\frac{e^2}{4\pi\epsilon_0}2\sqrt{\frac{2b}{\pi}}
+   = E_{gs}(b)
+\end{equation}
+\item Now, we need to minimise $E_{gs}(b)$
+
+  \begin{equation}\label{eq11}
+    \frac{\partial}{\partial b} E_{gs}(b) = \frac{3\hbar^2}{2m} - \frac{e^2}{4\pi\epsilon_0}
+    \sqrt{\frac{2}{\pi}}\frac{1}{\sqrt{b}} = 0
+  \end{equation}
+  solving for $b$
+  \begin{equation}\label{eq12}
+    \sqrt{b} = \frac{e^2}{4\pi\epsilon_0}\sqrt{\frac{2}{\pi}}\left(\frac{2m}{3\hbar^2}\right)
+    \Rightarrow b_{min} = \left(\frac{e^2}{4\pi\epsilon_0} \right)^2\frac{2}{\pi}
+    \left(\frac{2m}{3\hbar^2}\right)^2
+  \end{equation}
+  Replacing the result from \autoref{eq12} into \autoref{eq10} we get 
+  \begin{equation}\label{eq13}
+  \begin{aligned}
+  E_{gs}(b_{min}) &=  \frac{3\hbar^2}{2m} \left(\frac{e^2}{4\pi\epsilon_0} \right)^2\frac{2}{\pi}
+    \frac{4m^2}{9\hbar^4}
+  -\frac{e^2}{4\pi\epsilon_0}2\sqrt{\frac{2}{\pi}}\frac{e^2}{4\pi\epsilon_0}\sqrt{\frac{2}
+  {\pi}}\left(\frac{2m}{3\hbar^2}\right)\\
+                  &=\left(\frac{e^2}{4\pi\epsilon_0} \right)^2\frac{m}{\hbar^2}\left(\frac{4}{3\pi}
+                  - \frac{8}{3\pi}\right)\\
+                  &=\left(\frac{e^2}{4\pi\epsilon_0} \right)^2\frac{m}{\hbar^2}\left(-\frac{4}{3\pi}
+                  \right)\\
+                  &= -\frac{m}{2\hbar^2}\left(\frac{e^2}{4\pi\epsilon_0} \right)^2\left(
+                  \frac{8}{3\pi}\right), \quad E_1 =-\frac{m}{2\hbar^2}
+                  \left(\frac{e^2}{4\pi\epsilon_0} \right)^2\\
+                  &= \boxed{\frac{8}{3\pi}E_1 =\frac{8}{3\pi}(-13.6\,eV) = -11.5\,eV}
+  \end{aligned}
+  \end{equation}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 7.12}
+If the photon had nonzero mass $(m_\gamma \neq 0)$, the Coulomb potential would be replaced by a 
+\textbf{Yukawa potential}, of the form 
+\begin{equation}\label{eq21}
+  V(\mathbf{r}) = -\frac{e^2}{4\pi\epsilon_0}\frac{e^{-\mu r}}{r}
+\end{equation}
+where $\mu =\frac{m_\gamma\,c}{\hbar}$. With a trial wave function of your own devising, estimate 
+the binding energy of a "hydrogen" atom with this potential. Assume $\mu a \ll 1$, and give your 
+answer correct to order $(\mu a)^2$.
+\subsection*{Solution:}
+We know that is ground state of the Hydrogen is given by 
+\begin{equation}\label{eq22}
+  \psi = \frac{1}{\sqrt{\pi\,a_0^3}}e^{-r/a_0}
+\end{equation}
+So, let's suppose the "new" hydrogen atom has different Bohr radius, given the new potential. Then
+\autoref{eq22} becomes
+\begin{equation}\label{eq23}
+  \psi = \frac{1}{\sqrt{\pi\,b^3}}e^{-r/b}
+\end{equation}
+where $b$ is the radious parameter we must minimise to find the binding energy of the "hydrogen" 
+atom in the new potential.
+
+Now, let's write our Hamiltonian 
+\begin{equation}\label{eq24}
+  H = -\frac{\hbar^2}{2m}\nabla^2 - \frac{e^2}{4\pi\epsilon_0}\frac{e^{-\mu\,r}}{r}
+\end{equation}
+Since our trial wavefunction (\autoref{eq24}) is already normalised,
+we can continue to compute $\big<T\big>$ 
+and $\big<V\big>$
+\begin{equation}\label{eq25}
+\begin{aligned}
+  \big<T\big> &= \frac{1}{\pi\,b^3}\int e^{r/b} \left(\frac{-\hbar^2}{2m}\nabla^2\,e^{-r/b}\right)
+  dr^3\\
+              &= -\frac{\hbar^2}{2m\,\pi\,b^3}\int e^{-r/b}\left(\nabla^2\,e^{-r/b}\right)
+             dr^3 \,\quad \text{(use \autoref{eq6})}\\
+              &= \frac{\hbar^2}{2m\,\pi\,b^4}\int \frac{1}{r^2}\,e^{-2r/b}\left(
+              2r-\frac{r^2}{b}\right)dr^3\\
+              &=\frac{\hbar^2}{2m\,\pi\,b^4}\int_{0}^{\infty}e^{-2r/b}\left(
+              2r-\frac{r^2}{b}\right)dr\,\underbrace{\int_{0}^{\pi} sin\theta d\theta 
+    \int_{0}^{2\pi}d\phi}_{4\pi}\\
+              &=\frac{4\pi\,\hbar^2}{2m\,\pi\,b^4} \left[2\frac{b^2}{4} -
+              \frac{b^2}{4}\right] = \boxed{\frac{\hbar^2}{2m\,b^2} = \big<T\big>}
+\end{aligned}
+\end{equation}
+For the integral in \autoref{eq25}, I used the following formula
+\begin{equation}\label{eq26}
+  \int_{0}^{\infty} x^n\,e^{-ax}dx = \frac{n!}{a^{n+1}}
+\end{equation}
+\begin{equation}\label{eq27}
+\begin{aligned}
+  \big<V\big> &= \left(\frac{1}{\pi\,b^3}\right)\left(-\frac{e^2}{4\pi\epsilon_0}\right)
+  \int\frac{1}{r}\,e^{-2r/b}\,e^{-\mu\,r}dr^3\\
+              &=\left(\frac{1}{\pi\,b^3}\right)\left(-\frac{e^2}{4\pi\epsilon_0}\right)4\pi
+              \int_{0}^{\infty} e^{-r\left(2/b + \mu\right)}\,r\,dr\\
+              &= -\frac{e^2}{4\pi\epsilon_0}\frac{4}{b^3}\frac{1}{(2/b+\mu)^2}\\
+              &= \boxed{-\frac{e^2}{4\pi\epsilon_0}\frac{1}{b\left(1+\frac{\mu\,b}{2}\right)^2}
+              = \big<V\big>}
+\end{aligned}
+\end{equation}
+Now, use results from \autoref{eq25} and \autoref{eq27} to define $\big<H\big>$
+\begin{equation}\label{eq28}
+  \big<H\big> = \frac{\hbar^2}{2m\,b^2} -\frac{e^2}{4\pi\epsilon_0}\frac{1}
+  {b\left(1+\frac{\mu\,b}{2}\right)^2} 
+\end{equation}
+Now, we need to minimise it 
+\begin{equation}\label{eq29}
+  \begin{aligned}
+    \frac{\partial \big<H\big>}{\partial b}  &= -\frac{\hbar^2}{m\,b^3}+\frac{e^2}{4\pi\epsilon_0}
+  \left[\frac{1}{b^2(1+\mu\,b/2)^2} + \frac{\mu}{b\left(1+\mu\,b/2\right)^3}\right]=0\\
+    0 &=-\frac{\hbar^2}{m\,b^3}+\frac{e^2}{4\pi\epsilon_0}\left[\frac{b(1+\mu b/2)^3 + \mu b^2 
+  (1+\mu b/2)^2}{b^3(1+\mu b/2)^5} \right]\\
+      &= -\frac{\hbar^2}{m\,b^3}+\frac{e^2}{4\pi\epsilon_0}\left[\frac{(1+3\mu b/2)}{b^2(1+\mu b
+      /2)^3}\right]\\
+        \frac{\hbar^2\,b}{m} \frac{4\pi\epsilon_0}{e^2}&= \frac{(1+3\mu b/2)}{(1+\mu b
+      /2)^3}\\
+          \frac{\hbar^2}{m}\left(\frac{4\pi\epsilon_0}{e^2}\right) &= b\frac{(1+3\mu b/2)}{(1+\mu b
+            /2)^3}\Rightarrow \boxed{a_0 =  b\frac{(1+3\mu b/2)}{(1+\mu b
+            /2)^3}}
+  \end{aligned}
+\end{equation}
+So, we got a relationship between the Bohr radius, and our new radius. But, there is a cubic relation
+, then we need to simplify even more using the fact that $\mu a_0 \ll 1$
+so we can say that $\mu b\ll 1$ as well.
+
+Using binomial theorem 
+\begin{equation}\label{eq210}
+  (1+x)^{-n} = 1 - nx + \frac{n(n+1)}{2!}x^2 + \cdots
+\end{equation}
+
+Therefore
+\begin{equation}\label{eq211}
+  \left(\frac{\mu b}{2} + 1\right)^{-3} =  1 - \frac{3\mu b}{2} + \frac{3(\mu b)^2}{2}
+\end{equation}
+Now, rewrite \autoref{eq29}
+\begin{equation}\label{eq212}
+  \begin{aligned}
+    a_0 &\approx b\left[\left(1+\frac{3\mu b}{2}\right)\left( 1 - \frac{3\mu b}{2}
+    + \frac{3(\mu b)^2}{2} \right)\right]\\
+        &\approx b\left(1 + \frac{3\mu b}{2} - \frac{3\mu b}{2} - \frac{9(\mu b)^2}{4}
+        + \frac{3(\mu b)^2}{2}+\frac{9(\mu b)^3}{4}\right)\\
+        &= b\left(1 - \frac{3(\mu b)^2}{4}\right) \quad \text{(neglect third order)}\\
+      b &= \frac{a_0}{\left(1 - \frac{3(\mu b)^2}{4}\right)  }
+\end{aligned}
+\end{equation}
+Expanding in the denominator in the same way, we get 
+\begin{equation}\label{eq213}
+b \approx a_0 \left(1 + \frac{3(\mu b)^2}{4}\right)
+\end{equation}
+Since $\frac{3(\mu b)^2}{4}$ is a really small number, we can write 
+\begin{equation}\label{eq214}
+b \cong a_0 \left(1 + \frac{3(\mu a_0)^2}{4}\right)
+\end{equation}
+Now, replacing this result into \autoref{eq28}
+\begin{equation}\label{eq215}
+  \big<H_{min}\big> = \frac{\hbar^2}{2m}\frac{1}{a_0^2 \left(1 + \frac{3(\mu a_0)^2}{4}\right)^2}
+  -\frac{e^2}{4\pi\epsilon_0}\frac{1}
+  {a_0 \left(1 + \frac{3(\mu a_0)^2}{4}\right)\left(1+\frac{\mu a_0}{2}\right)^2} 
+\end{equation}
+Expanding the denominators
+\begin{equation}\label{eq216}
+\begin{aligned}
+  \big<H_{min}\big> &\approx \frac{\hbar^2}{2m\,a_0^2}\left[1-2\frac{3{(\mu a_0)^2}}{4}\right]
+  -\frac{e^2}{4\pi\epsilon_0\,a_0}\left[1-\frac{3(\mu a_0)^2}{4}\right]
+  \left[1 -2 \frac{\mu a_0}{2} + 3\left(\frac{\mu a_0}{2}\right)^2 \right]\\
+  &=\frac{\hbar^2}{2m\,a_0^2}\left[1-\frac{3{(\mu a_0)^2}}{2}\right] -\frac{e^2}{4\pi\epsilon_0 a_0}
+  \left[1-\mu a_0 + \frac{3(\mu a_0)^2}{4} - \frac{3(\mu a_0)^2}{4}\right]\\
+  &= -E_1\left[1-\frac{3{(\mu a_0)^2}}{2}\right]+2E_1[1-\mu a_0]\\
+  &= \boxed{E_1\left[1-2\mu a_0 + \frac{3}{2}(\mu a_0)^2\right]}
+\end{aligned}
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 7.13}
+Suppose you are given a quantum system whose Hamiltonian $H_0$ admits just two eigenstates, 
+$\psi_a$ (with energy $E_a$), and $\psi_b$ (with energy $E_b$). They are orthogonal, normalised 
+, and nondegenerate (assume $E_a$ is the smaller of the two). Now, we turn in a perturbation $H'$,
+with the following matrix elements: 
+\begin{equation}\label{eq31}
+\big<\psi_a\big|H'\big|\psi_a\big> =\big<\psi_b\big|H'\big|\psi_b\big> =0 ;
+\quad \big<\psi_a\big|H'\big|\psi_b\big> = \big<\psi_b\big|H'\big|\psi_a\big> = h
+\end{equation}
+\begin{enumerate}[a)]
+  \item Find the exact eigenvalues of the perturbed Hamiltonian.
+  \item Estimate the energies of the perturbed system using second-order perturbation theory.
+  \item Estimate the ground state energy of the perturbed system using variational principle, 
+    with a trial function of the form
+    \begin{equation}\label{eq32}
+    \psi = (cos\phi)\psi_a + (sin\phi)\psi_b
+    \end{equation}
+    where $\phi$ is an adjustable parameter. (Note that writing the linear combination in this way
+    guarantees that $\psi$ is normalised.)
+  \item Compare your answers to (a), (b), and (c). Why is the variational principle so accurate in
+    this case?
+\end{enumerate}
+\subsection*{Solution:}
+\begin{enumerate}[a)]
+  \item
+
+    To find the eigenvalues, we use the following relation
+    \begin{equation}\label{eq33}
+      \det\big|H-\lambda I\big| = 0
+    \end{equation}
+    But first we need to define $H$
+    \begin{equation}\label{eq34}
+H = H_0 + H'
+    \end{equation}
+Since the eigenstates of the system are orthogonal, and nondegenerate, we can write 
+\begin{equation}\label{eq35}
+  H_0 = 
+  \begin{pmatrix}
+    E_a & 0\\
+    0 & E_b
+  \end{pmatrix}
+\end{equation}
+and $H'$ is given by the problem as 
+\begin{equation}\label{eq36}
+  H' = \begin{pmatrix}
+    0 & h\\
+    h & 0
+  \end{pmatrix}
+\end{equation}
+then, $H$ has the form 
+\begin{equation}\label{eq37}
+  H' = \begin{pmatrix}
+    E_a & h\\
+    h & E_b
+  \end{pmatrix}
+\end{equation}
+Now, let's find the eigenvalues. Using \autoref{eq33}
+\begin{equation}\label{eq38}
+  \begin{aligned}
+  \det \begin{vmatrix}
+    E_a-\lambda & h\\
+    h & E_b-\lambda
+  \end{vmatrix} = 0 &= (E_a-\lambda)(E_b-\lambda) - h^2\\
+  &= E_aE_b -\lambda(E_a+E_b) + \lambda^2 -h^2\\
+    \lambda &= \frac{E_a+E_b}{2}\pm \frac{\sqrt{(E_a+E_b)^2 - 4(E_aE_b -h^2)}}{2}
+\end{aligned}
+\end{equation}
+Finally 
+\begin{equation}\label{eq39}
+  \boxed{E_\pm = \frac{E_a+E_b}{2}\pm \frac{\sqrt{(E_a-E_b)^2 + 4h^2}}{2}}
+\end{equation}
+\item 
+Second order perturbation theory is given by 
+\begin{equation}\label{eq310}
+  E_n = E_n^0 + \big<\psi_n\big|H'\big|\psi_n\big> +\sum_{m\neq n}
+  \frac{\big|\big<\psi_m\big|H'\big|\psi_n\big> \big|^2}{E_n^0 - E_m^0}
+\end{equation}
+Then, for the given eigenenergies, and using the matrix elements from \autoref{eq31}
+\begin{align}\label{eq311}
+  \tilde{E_a} &= E_a + \frac{\big|\big<\psi_b\big|H'\big|\psi_a\big> \big|^2}{E_a-E_b}\nonumber\\
+  \Aboxed{E_- &= E_a-\frac{h^2}{E_b-E_a}}\\
+ \tilde{E_b} &= E_b + \frac{\big|\big<\psi_a\big|H'\big|\psi_b\big> \big|^2}{E_b-E_a}\nonumber\\
+  \Aboxed{E+ &= E_b + \frac{h^2}{E_b-E_a}}
+  \end{align}
+\item So, we need to compute $\big<H\big>$ 
+\begin{equation}\label{312}
+  \begin{aligned}
+    \big<H\big> &= \big<\psi\big|H_0\big|\psi\big> + \big<\psi\big|H'\big|\psi\big>\\
+                &= \big<\cos\phi\,\psi_a + \sin\phi\,\psi_b|H_0\big|\cos\phi\,\psi_a + 
+                \sin\phi\,\psi_b\big>\\
+                &+\big<\cos\phi\,\psi_a + \sin\phi\,\psi_b|H'\big|\cos\phi\,\psi_a + 
+                \sin\phi\,\psi_b\big>\\
+                &= \cos^2\phi\,\big<\psi_a\big|H_0\big|\psi_a\big>+
+                \sin^2\phi\,\big<\psi_b\big|H_0\big|\psi_b\big>\\
+                &+ \sin\phi\,\cos\phi\,\big<\psi_b\big|H'\big|\psi_a\big> +
+\sin\phi\,\cos\phi\,\big<\psi_a\big|H'\big|\psi_b\big>\\
+                &= E_a\,\cos^2\phi + E_b\,\sin^2\phi + 2h\sin\phi\cos\phi
+  \end{aligned}
+\end{equation}
+Now, we have to minimise $\big<H\big>$
+\begin{equation*}
+\begin{aligned}
+  \frac{\partial \big<H\big>}{\partial\phi} &= -E_a\,2\cos\phi\sin\phi + E_b\,2\sin\phi\cos\phi
+  + 2h(\cos^2\phi - \sin^2\phi)\\
+  0 &= (E_b - E_a)\sin(2\phi) + 2h\cos(2\phi)\\
+  \tan(2\phi)&= -\frac{2h}{(E_b - E_a)} = -\epsilon,\quad \text{where}\quad 
+  \epsilon = \frac{2h}{E_b- E_a}\\
+  \text{we can write } \epsilon \,\,\text{as follows}\\
+  -\epsilon = \frac{\sin(2\phi)}{\sqrt{1-\sin^2(2\phi)}} &\Rightarrow \sin^2(2\phi) = \epsilon^2
+  (1 - \sin^2(2\phi))
+\end{aligned}
+\end{equation*}
+\[
+\Rightarrow \sin^2(2\phi)[1+\epsilon^2] = \epsilon^2 
+\]
+Solving for $\sin^2(2\phi)$
+\begin{equation}\label{eq314}
+\sin^2(2\phi) = \frac{\epsilon^2}{1+\epsilon^2} \Rightarrow \sin(2\phi) = \frac{\pm \epsilon}
+{\sqrt{1+\epsilon^2}}
+\end{equation}
+We can also write 
+\begin{equation}\label{eq315}
+  \cos^2(2\phi) = 1 - \sin^2(2\phi) = 1 - \frac{\epsilon^2}{1+\epsilon^2} = \frac{1}
+  {1+\epsilon^2} \Rightarrow \cos(2\phi) = \frac{\mp 1}{\sqrt{1+\epsilon^2}}
+\end{equation}
+the sign is given by $\tan(\phi)$.
+
+But we need to find an expression for $\sin^2\phi$ and $\cos^2\phi$ so we can plug them in our 
+Hamiltonian, therefore i will use the following trig. identities 
+\begin{align}\label{eq316}
+  \cos^2\phi &= \frac{1}{2}\left(1+\cos(2\phi)\right) = \frac{1}{2}\left(1\mp \frac{1}
+  {\sqrt{1-\epsilon^2}}\right)\\
+    \sin^2\phi &= \frac{1}{2}\left(1-\cos(2\phi)\right) = \frac{1}{2}\left(1\pm \frac{1}
+    {\sqrt{1+\epsilon^2}}\right)
+\end{align}
+taking into account that $2\sin\phi \cos\phi = \sin(2\phi)$, and using the results from \ref{eq314},
+\ref{eq316}, let's rewrite our Hamiltonian 
+\begin{align}\label{eq318}
+  \big<H\big>_{min} &= \frac{1}{2}E_a \left(1\mp \frac{1}{\sqrt{1+\epsilon^2}}\right) + \frac{1}{2}
+  E_b\left(1\pm \frac{1}{\sqrt{1+\epsilon^2}}\right) \pm h\frac{\epsilon}{\sqrt{1+\epsilon^2}}
+  \nonumber\\
+  \big<H\big>_{min} &= \frac{1}{2}\left[E_a+E_b \pm \frac{(E_b -E_a + 2h\epsilon)}
+  {\sqrt{1+\epsilon^2}}\right]
+\end{align}
+Simplifying 
+\begin{align}\label{eq319}
+ \frac{(E_b -E_a + 2h\epsilon)}
+ {\sqrt{1+\epsilon^2}}  &= \frac{(E_b-E_a)+2h\frac{2h}{(E_b-E_a)}}{\sqrt{1 + \frac{4h^2}{(E_b-E_a)
+ ^2}}}\nonumber\\
+                        &= \frac{(E_b-E_a)^2 + 4h^2}{\sqrt{(E_b-E_a)^2 + 4h^2}}\nonumber\\
+                        &= \sqrt{(E_b-E_a)^2 + 4h^2}
+\end{align}
+So, 
+\begin{align}\label{eq320}
+  \big<H\big>_{min} &= \frac{1}{2}\left[E_a+E_b \pm\sqrt{(E_b-E_a)^2 + 4h^2}
+  \right]\\
+    \Aboxed{ E_\pm  &= \frac{1}{2}\left[E_a+E_b \pm\sqrt{(E_b-E_a)^2 + 4h^2}
+                    \right] }
+\end{align}
+We can see that this result is similar to that obtained in part a (\autoref{eq39}). Considering
+that $h$ is very small, we can perform binomial expansion (\autoref{eq210})
+\[
+  E_\pm = \frac{1}{2}\left[E_a+E_b \pm (E_b-E_a)\sqrt{1+\frac{4 h^2}{(E_b-E_a)^2}}\right]
+\]
+\[
+  E_\pm \approx \frac{1}{2}\left[E_a+E_b \pm (E_b-E_a)\left(1+\frac{2h^2}{(E_b-E_a)^2}\right) 
+  \right]
+\]
+\[
+  E_\pm = \frac{1}{2}\left[E_a+E_b \pm (E_b-E_a) \pm \frac{2h^2}{(E_b-E_a)}\right]
+\]
+Therefore 
+\begin{align}\label{eq322}
+  E_- &= E_a - \frac{h^2}{(E_b-E_a)}\\
+  E_+ &= E_b + \frac{h^2}{(E_b-E_a)}
+\end{align}
+\item As we can see, results from (c), ( (a) follows the same expansion),
+  confirm the perturbation theory results in (b). The variational principle (c) gets the ground
+  state ($E_-$) exactly right, and this is because the trial wavefunction (\autoref{eq32}) is 
+  almost the most general state. 
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 7.14}
+As an explicit example of the method developed in Problem 7.13, consider an electron at rest in a 
+uniform magnetic field $\mathbf{B} = B_z\hat{k}$, for which the Hamiltonian is (Equation 4.158)
+\begin{equation}\label{eq41}
+  H_0 = \frac{e\,B_z}{m}S_z
+\end{equation}
+The eigenspinors, $\chi_a$ and $\chi_b$, and the corresponding energies, $E_a$ and $E_b$, are 
+given in Equation 4.161. Now we turn on a perturbation, in the form of a uniform field in the $x$
+direction: 
+\begin{equation}\label{eq42}
+  H' = \frac{e\,B_x}{m}S_x
+\end{equation}
+\begin{enumerate}[a)]
+  \item Find the matrix elements of $H'$, and confirm that they have the structure of Equation 7.55.
+    What is $h$?
+  \item Using your result in Problem 7.13 (b), find the new ground-state energy, in second-order 
+    perturbation theory.
+  \item Using your result in Problem 7.13 (c), find the variational principle bound on the 
+    ground-state energy.
+\end{enumerate}
+\subsection*{Solution:}
+For the electron: 
+\begin{equation}
+  \gamma = \frac{-e}{m}
+\end{equation}
+and, from Equation 4.161, we have that
+\begin{equation}
+  E_\pm = \pm \frac{eB_z\hbar}{2m}
+\end{equation}
+Following the conditions of the Problem 7.13, let $E_a < E_b$, so
+\begin{align}\label{eq45}
+  \chi_a &= \chi_- = \begin{pmatrix}
+    0\\
+  1 \end{pmatrix}\\
+  \chi_b &= \chi_+ = \begin{pmatrix}
+    1\\
+    0
+   \end{pmatrix}\\
+    E_a &= E_- = -\frac{eB_z\hbar}{2m}\\
+    E_b &= E_+ = \frac{eB_z\hbar}{2m}\\
+    S_x &= \frac{\hbar}{2}\begin{pmatrix}
+      0 & 1\\
+      1 & 0
+    \end{pmatrix}
+\end{align}
+\begin{enumerate}[a)]
+  \item 
+    
+    \begin{align}
+      \big<\chi_a\big|H'\big|\chi_a\big>&= \frac{eB_x}{m}\frac{\hbar}{2}\begin{pmatrix} 
+        0 & 1 \end{pmatrix}
+        \begin{pmatrix}
+        0 & 1\\
+        1 & 0
+        \end{pmatrix}
+        \begin{pmatrix} 
+        0\\
+        1
+        \end{pmatrix}
+       = \frac{eB_x\hbar}{2m}
+      \begin{pmatrix}
+        0 & 1
+      \end{pmatrix}
+      \begin{pmatrix}
+        1\\
+        0
+      \end{pmatrix} = 0\\
+\big<\chi_b\big|H'\big|\chi_b\big>&= \frac{eB_x}{m}\frac{\hbar}{2}\begin{pmatrix} 
+        1 & 0 \end{pmatrix}
+        \begin{pmatrix}
+        0 & 1\\
+        1 & 0
+        \end{pmatrix}
+        \begin{pmatrix} 
+        1\\
+        0
+        \end{pmatrix}
+       = 0\\
+\big<\chi_b\big|H'\big|\chi_a\big>&= \frac{eB_x}{m}\frac{\hbar}{2}\begin{pmatrix} 
+        1 & 0 \end{pmatrix}
+        \begin{pmatrix}
+        0 & 1\\
+        1 & 0
+        \end{pmatrix}
+        \begin{pmatrix} 
+        0\\
+        1
+        \end{pmatrix}
+        = \frac{eB_x\hbar}{2m}\\
+         \big<\chi_a\big|H'\big|\chi_b\big>&= \frac{eB_x}{m}\frac{\hbar}{2}\begin{pmatrix} 
+        0 & 1 \end{pmatrix}
+        \begin{pmatrix}
+        0 & 1\\
+        1 & 0
+        \end{pmatrix}
+        \begin{pmatrix} 
+        1\\
+        0
+        \end{pmatrix}
+       = \frac{eB_x\hbar}{2m}
+      \begin{pmatrix}
+        0 & 1
+      \end{pmatrix}
+      \begin{pmatrix}
+        0\\
+        1
+      \end{pmatrix} = \frac{eB_x\hbar}{2m}
+  \end{align}
+Therefore 
+\begin{equation}
+  \boxed{h = \frac{eB_x\hbar}{2m}}
+\end{equation}
+and the conditions of Problem 7.13 are met.
+
+\item From Problem 7.13
+  \begin{equation}
+    E_{gs} \approx E_a - \frac{h^2}{(E_b-E_a)} = -\frac{eB_z\hbar}{2m} - \frac{(eB_x\hbar/2m)^2}
+    {eB_z\hbar/m} = \boxed{-\frac{e\hbar}{2m}\left(B_z + \frac{B_x^2}{2B_z}\right)}
+  \end{equation}
+\item  From Problem 7.13(c), 
+\begin{equation}
+  E_{gs}= \frac{1}{2}\left[E_a+E_b -\sqrt{(E_b-E_a)^2 + 4h^2}
+                    \right] 
+\end{equation}
+\begin{equation}
+  E_{gs} = -\frac{1}{2}\sqrt{\left(\frac{eB_z\hbar}{m}\right)^2 + 4\left(\frac{eB_x\hbar}{2m}
+  \right)^2} = \boxed{-\frac{e\hbar}{2m}\sqrt{B_z^2+B_x^2}}
+\end{equation}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 7.17}
+The fundamental problem in harnessing nuclear fusion is getting the two particles (say, two 
+deuterons) close enough together for the attractive (but short-range) nuclear force to overcome 
+the Coulomb repulsion. The "brute force" method is to heat the particles to fantastic temperatures
+and allow the random collissions to bring them together. A more exotic proposal is 
+\textbf{muon catalysis}, in which we construct a "hydrogen molecule ion", only with deuterons
+in place of protons, and a \emph(muon) in place of the electron. Predict the equilibrium 
+separation distance between the deuterons in such a structure, and explain why muons are superior
+to electrons for this purpose.
+\subsection*{Solution:}
+We have to consider the reduced mass concept. Let reduced mass of the muon be $m_r$, and $m_\mu$
+be the mass of the muon
+\begin{equation}
+  m_r = \frac{m_\mu m_d}{m_\mu+m_d} = \frac{m_\mu 2m_p}{m_\mu+2m_p} = \frac{m_\mu}
+  {1 + m_\mu/2m_p}, \quad m_\mu = 207 m_e
+\end{equation}
+\[
+  1+\frac{m_\mu}{2m_p} = 1 + \frac{207(9.11\times 10^{-31})}{2(1.67\times 10^{-27})} = 1.056
+\]
+Therefore 
+\begin{equation}
+  m_r = \frac{207\,m_e}{1.056} = 196\,m_e
+\end{equation}
+, we know that the Bohr radius is defined as 
+\[
+  a_0 = \frac{4\pi\epsilon_0\hbar^2}{e^2\,m_e} 
+\]
+but in this case, $m_e \rightarrow m_\mu$, therefore, the molecule would shrink by a factor 
+of 196!, bringing the deuterons much closer together, as desired. Thus\\
+For the electron case: 
+\[
+R = 2.493\,a_0
+\]
+therefore, for muons:
+\[
+  R_\mu = 2.493 \frac{a_0}{196}
+\]
+\[
+  \boxed{R_\mu = 2.493\frac{0.529\times 10^{-10}}{196} = 6.73\times 10^{-13}\,m}
+\]
+We can see that the use of muon, yields to a shorter muonic radious than electronic Bohr
+radius. This brings the nuclei so close so the strong nuclear force can bind both nuclei 
+together very easily.
+
+
+\end{document}
+

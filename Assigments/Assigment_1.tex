@@ -1,0 +1,551 @@
+\documentclass[12 pt]{article}
+
+% Packages for mathematical symbols and equations
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{setspace}
+\usepackage{acro}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{physics}
+\usepackage{cancel}
+\usepackage{empheq}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage[english]{babel}
+\usepackage{bbold}
+\usepackage{amssymb}
+\usepackage{titlesec}
+\usepackage{adjustbox}
+\usepackage{float}
+\numberwithin{equation}{section}
+\usepackage{bm}
+\usepackage{wrapfig}
+\usepackage{relsize}
+\usepackage[letterpaper ,top=1in,bottom=1in,left=1in,right=1in,marginparwidth=1.75cm]{geometry}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usetikzlibrary{calc,trees,positioning,arrows,chains,shapes.geometric,%
+    decorations.pathreplacing,decorations.pathmorphing,shapes,%
+    matrix,shapes.symbols}
+\include{acronyms}
+%\geometry{top=1.3in,bottom=1.3in}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+  urlcolor=black}
+
+
+
+% Set page margins
+
+\title{Quantum Mechanics II\\
+Assignment I}
+\author{Gabriel Balarezo}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 6.27}
+
+Suppose a Hamiltonian $H$, for a  particular quantum system is a function of some parameter
+$\lambda$; let $E_n(\lambda)$ and $\psi_n(\lambda)$ be the eigenvalues and eigenfunctions of $H
+(\lambda)$. The \textbf{Feynman-Hellmann theorem} states that
+\[
+  \frac{\partial E_n}{\partial \lambda} = \bigg<\psi_n\bigg|\frac{\partial H}{\partial \lambda}
+  \bigg|\psi_n\bigg>
+\]
+(assuming either that $E_n$ is nondegenerate, or if degenerate that $\psi_n$'s are the 
+"good" linear combinations of the degenerate eigenfunctions).
+\begin{enumerate}[a)]
+  \item Prove the Feynman-Hellmann theorem. Hint: Use Equation 6.9.
+  \item Apply it to the one-dimensional harmonic oscillator, (i) using $\lambda=\omega$
+    (this yields a formula for the expectation value of $V$ ), (ii) using $\lambda=\hbar$ 
+    (this yields $\big<T\big>)$, and (iii) using $\lambda=m$ (this yields a relation between 
+    $\langle T\rangle$ and $\big<V\big>)$. Compare your answers to Problem 2.37 and the virial
+    theorem predictions (Problem 3.53).
+\end{enumerate}
+\subsection*{Solution}
+\textbf{Part a}\\
+\\
+Let's suppose $H_\lambda$ a hamiltonian which depends on a parameter $\lambda$. Then let $E_\lambda$
+be the eigenenergies, and $\psi_\lambda$ be the normalised
+eigenstates which also depend on $\lambda$.\\
+\\
+Then we can write the following 
+\[
+  H_\lambda \big|\psi_\lambda\big> = E_\lambda\big|\psi_\lambda\big>
+\]
+and using Equation 6.9 as suggested,we can write the following equation
+\[
+  E_\lambda = \big<\psi_\lambda\big|H_\lambda\big|\psi_\lambda\big>
+\]
+Now let's differentiate w.r.t $\lambda$ in both sides
+\begin{align*}
+  \frac{\partial}{\partial \lambda} E_\lambda = \frac{\partial}{\partial \lambda}
+  \big<\psi_\lambda\big|H_\lambda\big|\psi_\lambda\big>
+\end{align*}
+using chain rule
+\begin{align*}
+  \frac{\partial E_\lambda}{\partial \lambda} =
+  \bigg<\frac{\partial \psi_\lambda}{\partial \lambda}\bigg|H_\lambda\bigg|\psi_\lambda\bigg>
+  + \bigg<\psi_\lambda\bigg|\frac{\partial H_\lambda}{\partial \lambda}\bigg|\psi_\lambda\bigg>
+  +  \bigg<\psi_\lambda\bigg|H_\lambda\bigg|\frac{\partial \psi_\lambda}{\partial \lambda}\bigg>
+\end{align*}
+we know that
+\[
+  H_\lambda\big|\psi_\lambda\big> =  E_\lambda\big|\psi_\lambda\big>,\quad \text{and}
+  \quad\big<\psi_\lambda\big|H_\lambda = E_\lambda\big<\psi_\lambda\big| 
+\]
+then 
+\begin{align*}
+  \frac{\partial E_\lambda}{\partial \lambda}&=
+  E_\lambda\bigg<\frac{\partial \psi_\lambda}{\partial \lambda}\bigg|\psi_\lambda\bigg>
+  + \bigg<\psi_\lambda\bigg|\frac{\partial H_\lambda}{\partial \lambda}\bigg|\psi_\lambda\bigg>
+  + E_\lambda\bigg<\psi_\lambda\bigg|\frac{\partial \psi_\lambda}{\partial \lambda}\bigg>\\
+  &=
+   \bigg<\psi_\lambda\bigg|\frac{\partial H_\lambda}{\partial \lambda}\bigg|\psi_\lambda\bigg>
+   + E_\lambda\left(\bigg<\frac{\partial \psi_\lambda}{\partial \lambda}\bigg|\psi_\lambda\bigg>
+   + \bigg<\psi_\lambda\bigg|\frac{\partial \psi_\lambda}{\partial \lambda}\bigg>\right)\\
+  &= \bigg<\psi_\lambda\bigg|\frac{\partial H_\lambda}{\partial \lambda}\bigg|\psi_\lambda\bigg>
+  + E_\lambda\left(\frac{\partial }{\partial \lambda}\bigg<\psi_\lambda\bigg|\psi_\lambda\bigg>
+  +  \frac{\partial }{\partial \lambda}\bigg<\psi_\lambda\bigg|\psi_\lambda\bigg>\right), 
+  \quad \big<\psi_\lambda\big|\psi_\lambda\big> = 1\\
+  &= \bigg<\psi_\lambda\bigg|\frac{\partial H_\lambda}{\partial \lambda}\bigg|\psi_\lambda\bigg>
+  + E_\lambda\cancelto{0}{\left(\frac{\partial }{\partial \lambda} (1)+\frac{\partial }{\partial \lambda} (1)
+  \right)}
+\end{align*}
+Finally we have that: 
+\[
+ \frac{\partial E_\lambda}{\partial \lambda}=\bigg<\psi_\lambda\bigg|\frac{\partial
+ H_\lambda}{\partial \lambda}\bigg|\psi_\lambda\bigg> 
+\]
+or 
+\[
+  \frac{\partial E_n}{\partial \lambda}=\bigg<\psi_n\bigg|\frac{\partial
+ H_\lambda}{\partial \lambda}\bigg|\psi_n\bigg>  
+\]
+as stated in the problem. \\
+\\
+\textbf{Part b}\\
+\\
+For the 1D Harmonic oscillator:
+\[
+  H = -\frac{\hbar^2}{2m}\frac{d^2}{dx^2} +\frac{1}{2}m\omega^2 x^2,\quad 
+  E_n = \hbar\omega\left(n+\frac{1}{2} \right), \quad n=0,1,2,3,\cdots
+\]
+\\
+\textbf{ i)}  $\mathbf{\lambda = \omega}$\\
+ \\
+ Compute the derivatives:
+ \begin{align*}
+   \frac{\partial E_n}{\partial \omega} &= \hbar\left(n+\frac{1}{2}\right)\\
+  \frac{\partial H}{\partial \omega}&= m\omega x^2
+\end{align*}
+Aplying the Feynman-Hellmann theorem: 
+\[
+  \hbar\left(n+\frac{1}{2}\right) = \bigg<m\omega x^2\bigg>
+\]
+we can notice that the right hand side can be written as 
+\[
+  m\omega x^2 = \frac{2}{\omega} V
+\]
+then 
+\[
+  \hbar\left(n+\frac{1}{2}\right) = \frac{2}{\omega}\bigg<V\bigg>
+\]
+Finally we get
+\[
+  \boxed{ \frac{\hbar\omega}{2}\left(n+\frac{1}{2}\right) = \bigg<V\bigg>}
+\]
+which is the expectation value of the potential energy
+for a 1D harmonic oscillator for any value of n.\\
+\\
+\textbf{ii) }$\lambda = \hbar$\\
+\\
+Compute the derivatives:
+\begin{align*}
+  \frac{\partial E_n}{\partial \hbar} &= \omega\left(n+\frac{1}{2}\right)\\
+  \frac{\partial H}{\partial \omega}&= \frac{-\hbar}{m}\frac{d}{dx}
+\end{align*}
+Aplying the Feynman-Hellmann theorem:
+\[
+ \omega\left(n+\frac{1}{2}\right) = \bigg< \frac{-\hbar}{m}\frac{d^2}{dx^2}
+\bigg> 
+\]
+we can rewrite the right hand side as follows
+\[
+  \frac{-\hbar}{m}\frac{d^2}{dx^2} = \frac{2}{\hbar} T
+\]
+then 
+\[
+ \omega\left(n+\frac{1}{2}\right) = \frac{2}{\hbar}\bigg<T\bigg> 
+\]
+from here we get
+\[
+  \boxed{\frac{\hbar\omega}{2}\left(n+\frac{1}{2}\right) = \bigg<T\bigg>}
+\]
+which is the expectation value of the kinetic energy for a 1D harmonic oscillator. \\
+\\
+\\
+\textbf{iii)} $\lambda= m$\\
+\\
+Get the derivatives:
+\begin{align*}
+  \frac{\partial E_n}{\partial m} &= 0\\
+  \frac{\partial H}{\partial m} &= \frac{\hbar^2}{2m^2}\frac{d^2}{dx^2} + \frac{1}{2}\omega^2x^2
+\end{align*}
+Apply the Feynman-Hellmann theorem
+\[
+  0 = \bigg<\frac{\hbar^2}{2m^2}\frac{d^2}{dx^2}\bigg> +
+  \bigg<\frac{1}{2}\omega^2x^2 \bigg>
+\]
+the expresions in the right hand side can be written as 
+\begin{align*}
+  \frac{\hbar^2}{2m^2}\frac{d^2}{dx^2} &= -\frac{1}{m}T\\
+  \frac{1}{2}\omega^2x^2 &= \frac{1}{m}V
+\end{align*}
+then, the theorem becomes 
+\[
+ 0 = -\frac{1}{m}\bigg<T\bigg> + \frac{1}{m}\bigg<V\bigg>
+\]
+from here, we can derive the following expresion: 
+\[
+  \boxed{ \bigg<T\bigg> = \bigg<V\bigg>}
+\]
+which is the relation proposed by the virial theorem.\\
+\\
+Now, let's compare our results with those from Problem 2.37, and the virial theorem predictions 
+in Problem 3.53. \\
+\\
+The results from \textbf{(i)} and \textbf{(ii)} agree with those we obtained using the Feynman-
+Hellmann theorem, which seems to be a more efficient way to compute those expectation values. 
+\\
+In addition, the result from part \textbf{(iii)} effectively agree with the virial theorem 
+predictions. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 6.28}
+The Feynman-Hellmann theorem (Problem 6.27) can be used to determine the expectation values of 
+$1 / r$ and $1 / r^2$ for hydrogen.  The effective Hamiltonian for the radial wave functions
+is (Equation 4.53)
+\[
+H=-\frac{\hbar^2}{2 m} \frac{d^2}{d r^2}+\frac{\hbar^2}{2 m} \frac{l(l+1)}{r^2}-
+\frac{e^2}{4 \pi \epsilon_0} \frac{1}{r},
+\]
+and the eigenvalues (expressed in terms of l) are (Equation 4.70)
+\[
+E_n=-\frac{m e^4}{32 \pi^2 \epsilon_0^2 \hbar^2\left(j_{\max }+l+1\right)^2}
+\]
+\begin{enumerate}[a)]
+  \item Use $\lambda=e$ in the Feynman-Hellmann theorem to obtain $\langle 1 / r\rangle$. 
+    Check your result against Equation 6.54 .
+  \item  Use $\lambda=l$ to obtain $\left\langle 1 / r^2\right\rangle$. Check your answer 
+    with Equation 6.55.
+\end{enumerate}
+\subsection*{Solution}
+\textbf{Part a}\\
+\\
+First let's compute the necessary derivatives setting $\lambda = e$:
+\begin{align*}
+  \frac{\partial E_n}{\partial e} &= -\frac{1}{8}\frac{me^3}{\pi^2\epsilon_0^2\hbar^2
+  (j_{max}+l+1)^2} \\
+  \frac{\partial H}{\partial e} &= -\frac{e}{2\pi\epsilon_0}\frac{1}{r}
+\end{align*}
+then, using the Feynman-Hellmann theorem we have 
+\begin{align*}
+  -\frac{1}{8}\frac{me^3}{\pi^2\epsilon_0^2\hbar^2
+  (j_{max}+l+1)^2} &= \bigg< -\frac{e}{2\pi\epsilon_0}\frac{1}{r}\bigg>\\
+                   &= -\frac{e}{2\pi\epsilon_0}\bigg<\frac{1}{r}\bigg>
+\end{align*}
+Solving for $\bigg<\frac{1}{r}\bigg>$
+\[
+  \bigg<\frac{1}{r}\bigg> = \frac{1}{4}\frac{me^3}{\pi\epsilon_0\hbar^2(j_{max}+l+1)^2}
+\]
+we can rewrite this expresion using the Bohr radius:
+\[
+  a_0 = \frac{4\pi\epsilon_0\hbar^2}{me^2}
+\]
+then, 
+\[
+  \bigg<\frac{1}{r}\bigg> = \frac{1}{a_0(j_{max}+l+1)^2}
+\]
+let $n = j_{max}+l+1$
+\[
+  \boxed{\bigg<\frac{1}{r}\bigg> = \frac{1}{a_0 n^2}},\qquad \parbox{0.4\textwidth}{
+    this result agrees with that stated in Equation 6.54.
+  }
+\]
+\textbf{Part b}\\
+\\
+Now we set $\lambda = l$, let's get the derivatives: 
+\begin{align*}
+  \frac{\partial E_n}{\partial l} &= \frac{2me^4}{32\pi^2\epsilon_0^2\hbar^2(j_{max}+l+1)^3}\\
+  \frac{\partial H}{\partial l}&= \frac{\hbar^2}{2m} \frac{2l+1}{r^2}
+\end{align*}
+Now, using the Feynman-Hellmann theorem we get 
+\begin{align*}
+ \frac{2me^4}{32\pi^2\epsilon_0^2\hbar^2(j_{max}+l+1)^3}
+ &= \bigg<\frac{\hbar^2}{2m} \frac{2l+1}{r^2} \bigg>\\
+ &=\frac{\hbar^2(2l+1)}{2m}\bigg<\frac{1}{r^2} \bigg>
+\end{align*}
+solving for $\bigg<\frac{1}{r^2}\bigg>$
+\begin{align*}
+  \bigg<\frac{1}{r^2}\bigg>&= \frac{2me^4}{32\pi^2\epsilon_0^2\hbar^2(j_{max}+l+1)^3}
+  \frac{2m}{\hbar^2(2l+1)}\\
+                           &= \frac{m^2e^4}{16\pi^2\epsilon_0^2\hbar^4
+                           (j_{max}+l+1)^3}\frac{1}{(l+1/2)}
+\end{align*}
+using Bohr radius and using $n = j_{max}+l+1$ we have
+\[
+  \boxed{ \bigg<\frac{1}{r^2}\bigg> =\frac{1}{(l+1/2)n^3a_0^2} } 
+  \qquad \parbox{0.3\textwidth}{This result agrees with that stated in Equation 6.55.}
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 6.30}
+\begin{enumerate}[a)]
+  \item Plug $s=0, s=1, s=2$, and $s=3$ into Kramers' relation (Equation 6.96) to obtain 
+    formulas for $\left\langle r^{-1}\right\rangle,\langle r\rangle,\left\langle 
+    r^2\right\rangle$, and $\left\langle r^3\right)$. Note that you could continue 
+    indefinilely, to find any positive power.
+  \item  In the other direction, however, you hit a snag. Put in $s=-1$, and show that all 
+    you get is a relation between $\left\langle r^{-2}\right\rangle$ and $\left\langle
+    r^{-3}\right\rangle$.
+  \item But if you can get $\big<r^{-2}\big>$ by some other means, you can apply the Kramers' 
+    relation to obtain the rest of the negative powers. Use Equation 6.55 (which is derived in 
+    Problem 6.28) to determine $\big<r^{-3}\big>$, and check your answer against Equation 6.63.
+\end{enumerate}
+Kramers' relation 
+\[
+  \frac{s+1}{n^2}\big<r^s\big> - (2s+1)a_0 \big<r^{s-1}\big> + \frac{s}{4}\left[
+  (2l+1)^2-s^2\right]a_0^2\big<r^{s-2}\big> = 0
+\]
+\textbf{Part a}\\
+\\
+\textbf{Pluggin $s=0$}\\
+\\
+With $s = 0$, Kramers' relation becomes 
+\[
+  \frac{1}{n^2} - a_0\big<r^{-1}\big> = 0
+\]
+which yields to:
+\[
+  \boxed{\bigg<\frac{1}{r}\bigg> = \frac{1}{n^2 a_0}}
+\]
+\textbf{Pluggin $s= 1$}\\
+\\
+with $s=1$, Kramers' relation becomes: 
+\[
+  \frac{2}{n^2}\big<r\big> - 3a_0 + \frac{1}{4}\left[(2l+1)^2-1\right]a_0^2\big<r^{-1}\big>=0 
+\]
+solve for $\big<r\big>$, and use result obtained for $\bigg<\frac{1}{r}\bigg>$
+\begin{align*}
+  \big<r\big> &= \frac{n^2}{2}\left[3a_0- \frac{1}{4}\left[(2l+1)^2-1\right]a_0^2\big<r^{-1}
+  \big> \right]\\
+  &= \frac{n^2}{2}\left[3a_0- \frac{1}{4}\left[(2l+1)^2-1\right]a_0^2
+  \left(\frac{1}{a_0n^2}\right) \right]\\
+  &= \frac{n^2}{2}\left[3a_0- \frac{1}{4n^2}\left[(2l+1)^2-1\right]a_0\right]\\
+    \Aboxed{\big<r\big> &= \frac{a_0}{2}\left[3n^2- l(l+1)\right]}
+  \end{align*}
+\textbf{Pluggin $s=2$}
+\\
+with $s=2$, Kramers' relation becomes:
+\[
+  \frac{3}{n^2}\big<r^2\big>-5a_0\big<r\big> + \frac{1}{2}\left[4l(l+1)-3\right]a_0^2 = 0
+\]
+solve for $\big<r^2\big>$ and use the result obtained for $\big<r\big>$
+\begin{align*}
+  \big<r^2\big>&= \frac{n^2}{3}\left[5a_0\big<r\big> - \frac{1}{2}\left[4l(l+1)-3\right]a_0^2 
+  \right]\\
+&=\frac{n^2}{3}\left[5a_0\left(\frac{a_0}{2}\left[3n^2- l(l+1)\right]\right)
+- \frac{1}{2}\left[4l(l+1)-3\right]a_0^2\right]\\
+&= \frac{n^2a_0^2}{6}\left[15n^2 -5l(l+1) - 4l(l+1)+3\right]\\
+    \Aboxed{\big<r^2\big>&=\frac{n^2a_0^2}{2}\left[5n^2 -3l(l+1)+1\right] }
+\end{align*}
+\textbf{Pluggin $s=3$}\\
+\\
+with $s=3$, Kramers' relation becomes:
+\[
+  \frac{4}{n^2}\big<r^3\big> - 7a_0\big<r^2\big> + \frac{3}{4}\left[4l(l+1)-8\right]a_0^2\big<r
+  \big>=0
+\]
+solve for $\big<r^3\big>$. and use the results obtained for $\big<r\big>$ and $\big<r^2\big>$
+\begin{align*}
+  \big<r^3\big>&=\frac{n^2}{4}\left[7a_0\big<r^2\big>-\frac{3}{4}\left[4l(l+1)-8\right]
+  a_0^2\big<r\big>\right]\\
+  &=\frac{n^2}{4}\left[7a_0\left[\frac{n^2a_0^2}{2}\left(5n^2 -3l(l+1)+1\right) \right] 
+  -\frac{3}{4}\left(4l(l+1)-8\right)a_0^2\left[\frac{a_0}{2}\left(3n^2- l(l+1)\right)\right]
+\right] \\
+  &= \frac{n^2a_0^3}{4}\left[\frac{1}{2}\left(35n^4-21n^2l(l+1)+7n^2 \right)
+    -\frac{3}{8}\left[12n^2l(l+1)-4l^2(l+1)^2 -24n^2+8l(l+1)\right]\right]\\
+  &= \frac{n^2a_0^3}{8}\left[\left(35n^4-21n^2l(l+1)+7n^2 \right)-
+  \left(9n^2l(l+1)-3l^2(l+1)-18n^2+6l(l+1) \right)\right]\\
+\Aboxed{\big<r^3\big> &= \frac{n^2a_0^3}{8}\left[35n^4 - 30n^2l(l+1) +25n^2+3l^2(l+1)-6l(l+1)
+\right]}
+\end{align*}
+\textbf{Part b}\\
+\\
+\textbf{Plugin $s = -1$}\\
+\\
+with $s=-1$, Kramers' relation becomes:
+\[
+  a_0 \big<r^{-2}\big>-\frac{1}{4}\left[4l(l+1)\right]a_0^2\big<r^{-3}\big>=0 
+\]
+solve for $\big<r^{-3}\big>$ 
+\begin{align*}
+  \Aboxed{\big<r^{-3}\big> &= \frac{1}{l(l+1)a_0}\bigg<\frac{1}{r^2}\bigg>}
+\end{align*}
+\textbf{Part c}\\
+\\
+Using the result for $\big<r^{-2}\big>$ obtained in Problem 6.28, we get 
+\[\bigg<\frac{1}{r^2}\bigg> = \frac{1}{(l+1/2)n^3a_0^2}\]
+then
+\[
+  \big<r^{-3}\big> = \frac{1}{l(l+1)a_0}\left(\frac{1}{(l+1/2)n^3a_0^2} \right)
+\]
+\[
+  \boxed{\big<r^{-3}\big> = \frac{1}{l(l+1/2)(l+1)n^3a_0^3}}
+\]
+Finally, we can see that this result agrees with that stated in Equation 6.63.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Problem 6.33}
+Calculate the wavelength, in centimeters, of the photon emitted under a hyperfine 
+transition in the ground state $(n=1)$ of deuterium. Deuterium is "heavy" hydrogen,
+with an extra neutron in the nucleus. The proton and neutron bind together to form a 
+deuteron, with spin 1 and magnetic moment
+\[\vec{\mu}_d = \frac{g_d e}{2m_d}\vec{S}_d\]
+the deuteron g-factor is 1.71.
+\subsection*{Solution}
+We know that 
+\[
+  \vec{\mu}_d = \frac{g_d e}{2m_d}\vec{S}_d\quad \text{and}\quad g_d = 1.71 
+\]
+The hyperfine splitting is given by:
+\[
+  E_{hf}^1 = \frac{\mu_0 g_p e^2}{3\pi m_p m_e a_0^3}\big<\vec{S}_p\cdot\vec{S}_e\big>
+\]
+, but in this case we are interested in deuterium, so we have that:
+\[
+  E_{hf}^1 = \frac{\mu_0 g_d e^2}{3\pi m_d m_e a_0^3}\big<\vec{S}_d\cdot\vec{S}_e\big>
+\]
+We also know that
+\[
+  \big<\vec{S}_p\cdot\vec{S}_e\big> =\frac{1}{2}\left( S_{tot}^2 - S_e^2 -S_d^2\right), 
+  \qquad S_n^2 = \hbar^2s_n(s_n+1)
+\]
+here 
+\[
+  S_d = 1  \Rightarrow S_d^2 = \hbar^2 1(1+1) =2\hbar^2
+\]
+\[
+  S_e = \frac{1}{2} \Rightarrow S_e^2 = \hbar^2 \frac{1}{2}\left(\frac{1}{2}+1\right) =
+  \frac{3}{4}\hbar^2
+\]
+for the total spin we will have to cases
+\[
+  S_{tot} =
+  \begin{cases}
+    \frac{3}{2},\quad \text{when } s = \frac{1}{2}\\
+    \frac{3}{4}, \quad \text{when } s = -\frac{1}{2}
+  \end{cases}
+\]
+then 
+\[
+  S^2_{tot} =
+  \begin{cases}
+    \frac{15}{4}\hbar^2,\quad \text{when } s = \frac{1}{2}\\
+    \frac{3}{4}\hbar^2, \quad \text{when } s = -\frac{1}{2}
+  \end{cases}
+\]
+\[
+\big<\vec{S}_p\cdot\vec{S}_e\big> = \begin{cases}
+  \frac{1}{2}\left(\frac{15}{4}\hbar^2 - \frac{3}{4}\hbar^2 -2\hbar^2\right)&= \frac{1}{2}\hbar^2\\
+\frac{1}{2}\left(\frac{3}{4}\hbar^2 - \frac{3}{4}\hbar^2 -2\hbar^2\right)&= -\hbar^2\\
+\end{cases}
+\]
+Plugin this into the hyperfine splitting, we get
+\[
+ E_{hf}^1 =  \frac{\mu_0 g_d e^2}{3\pi m_d m_e a_0^3} \begin{cases}
+    \frac{1}{2}\hbar^2\\
+    -\hbar^2
+  \end{cases}
+\]
+Now, let's compute $\Delta E$
+\[
+  \Delta E = \frac{\mu_0 g_d e^2\hbar^2}{2\pi m_d m_e a_0^3}
+\]
+but 
+\[
+  \mu_0 \epsilon_0 = \frac{1}{c^2} \Rightarrow \mu_0 =\frac{1}{\epsilon_0c^2}
+\]
+So, 
+\[
+ \Delta E = \frac{ g_d e^2\hbar^2}{2\pi\epsilon_0 c^2 m_d m_e a_0^3}
+\]
+Rewrite this using Bohr radius
+\[
+  a_0 = \frac{4\pi \epsilon_0 \hbar^2}{me^2}
+\]
+\[
+\Rightarrow \Delta E = \frac{ 2g_d\hbar^4}{ m_d m_e^2 c^2 a_0^4} 
+\]
+Now, using the energy gap of the hydrogen 
+\[
+  \Delta E_{h} = \frac{4g_p\hbar^4}{3m_pm_e^2c^2a_0^4}\quad
+  \text{(Griffiths Equation 6.92)}
+\]
+we can rewrite as follows
+\[
+  \Delta E = \frac{3g_dm_p}{2g_pm_d}\Delta E_{h}
+\]
+The energy of a photon is given by 
+\[
+  E = h\nu = h \frac{c}{\lambda} \Rightarrow \lambda = \frac{h c}{E}
+\]
+then
+\[
+  \lambda_d = \frac{2g_pm_d}{3g_dm_p}\frac{hc}{\Delta E_{h}}
+\]
+but
+\[
+  \Delta E_{h} = \frac{hc}{\lambda_{h}} \Rightarrow  \Delta E_{h}
+  \lambda_{h} = hc
+\]
+then, 
+\[
+  \lambda_d = \frac{2g_pm_d}{3g_dm_p}\lambda_h 
+\]
+pluggin $g_p=5.59, g_d = 1.71,m_d/m_p = 2, \lambda_h = 21\,cm $
+\[
+  \lambda_d = \frac{2(5.59)(2)}{3(1.71)}(21\,cm)
+\]
+\[
+ \boxed{\lambda_d = 91.53\,cm}
+\]
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
