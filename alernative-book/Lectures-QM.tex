@@ -1,0 +1,413 @@
+\documentclass[12pt]{article}
+\usepackage{marginnote, sidenotes, fancyhdr, geometry, titlesec , lipsum}
+\usepackage{/home/pacman/Documents/tex-packages/NotesTeX}
+%/Path/to/package should be replaced with package location
+\usepackage{bbold}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=red,
+    urlcolor=red
+}
+
+
+\title{{\Huge Lectures on Quantum Mechanics}\\{\Large{SEM02-2023}}}
+\author{Gabriel Balarezo\footnote{\href{https://google.com/}{\textit{https://github.com/GabrielBJ}}}}
+
+\affiliation{Yachay Tech University \\ School of Nanotechnology and Physical Sciences \\ Urcuqui, Ecuador}
+\emailAdd{balarezog961@gmail.com}
+\begin{document}
+  \maketitle
+  \flushbottom
+  \newpage
+  \pagestyle{fancynotes}
+  \part*{Introduction}
+Quantum mechanics is certainly the most successful theory of the physical world at small scales. It is also one of the most mysterious.
+  
+  Some notes here.\sn{With some additional sidenotes}
+\newpage
+  \part{Time Independent Non-degenerate Perturbation Theory}
+
+  \section{Lecture 1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Suppose we have a "known" system with Hamiltonian, eigenfunctions and eigenenergies $\displaystyle{H_0}$,  $\displaystyle{\Psi_n}$ and $\displaystyle{E_n}$ respectively.
+  \begin{equation*}
+    \hat{H} |\Psi_n \rangle = E_n |\Psi_n \rangle 
+\end{equation*}
+where
+\sn{The student may remember the Dirac delta function from his/her Quantum Mechanics I course.}
+$$\langle \hat{\Psi} |\hat{H}|\hat{\Psi} \rangle = E_n,\,\,\,\,\,\,\,\,
+	\langle \Psi_n | \Psi_{n'} \rangle = \delta_{nn'} $$
+So that $\{\displaystyle{\Psi_n}\}$ forms a orthonormal basis over the Hilbert space of $\displaystyle{H_0}$. 
+We apply a perturbative potential $\tilde{V}$ \sn{$\tilde{V}$ is very small compared to $H_0$} to $H_0$, yielding a new Hamiltonian. 
+for the perturbated system,
+\begin{equation}
+\label{eq:1}
+  \tilde{H} = \hat{H_0} + \lambda \tilde{V},\,\,\,\,\text{let}\,\,\lambda \in [0,1]
+\end{equation}
+a "bookkeeping parameter" to keep track of the relative signs of from in order of the perturbated 
+potential.
+\subsection{Method}
+Express the wave functions and eigenenergies of the perturbated Hamiltonian $H$, $\tilde{\psi}$, $\tilde{E}_n$ 
+as a power series equation in orders of $\lambda$.
+\begin{align*}
+	\tilde{E}_n & = \tilde{E}^{(0)}_0 + \lambda \tilde{E}^{(1)}_n + \lambda^2 \tilde{E}^{(2)}_n
+	+ \cdots = \sum_{k} \lambda^{k} \tilde{E}^{(k)}_n\\
+	\tilde{\psi}_n & = \tilde{\psi}^{(0)}_n + \lambda \tilde{\psi}^{(1)}_n + \lambda^2 \tilde{\psi}^{(2)}_n 
+	+ \cdots = \sum_{k} \lambda^k \tilde{\psi}^{(k)}_n
+\end{align*}
+Now we write the Time independent Schr\"odinger equation for the perturbated Hamiltonian,
+\begin{align}
+  \tilde{H} \big|\tilde{\psi}_n \big > & = \tilde{E}_n \big|\tilde{\psi}_n \big >\\
+	(\hat{H} + \hat{V}) \sum_{k} \lambda^k \big| \psi^{(k)}_n \big > & = \sum_{k} \lambda^k \tilde{E}^{(k)}_n \sum_{k}
+	\lambda^k \big|\psi^{(k)}_n \big>\\
+	\sum_{k}(\lambda^k \hat{H}_0 + \lambda^{k+1} \hat{V}) \big|\hat{\psi}^{(k)}_n \big > & = \sum_{k'} \sum_{k}
+	\lambda^{k'+k} \hat{E}^{(k)}_n \big| \hat{\psi}^{(k)}_n \big >
+\end{align}
+\begin{equation}
+	\sum_{k} \left(\lambda^k \hat{H}_0 + \lambda^{k+1} \hat{V} - \sum_{k'} \lambda^{k'+ k}  
+	\hat{E}^{(k')}_n \right ) \big|\psi^{(k)}_n \big > = 0 
+\end{equation}
+\begin{equation}
+  \label{eq:6}
+	\sum_{k} \lambda^{k} \left(\hat{H}_0 \big| \hat{\psi}^{(k)}_n \big > + \underbrace{(1 - \delta_
+	{k0})}_{k\neq 0} \hat{V} \big| \hat{\psi}^{(k-1)} \big > - \sum_{k=0}^{k} \hat{E}^{(k')}_n 
+	\big | \hat{\psi}^{(k-k')}_n \big > \right ) = 0
+\end{equation}
+Since \ref{eq:6} is true for any value of $\lambda$, it must hold for each power of $\lambda$ separately:
+\begin{align*}
+	\mathcal{O}(1)_{k=0} & = \hat{H} \big | \hat{\psi}^{(0)}_n \big > + (1 - \delta_{k0}) \hat{V}
+	\big | \hat{\psi}^{(-1)}_n \big >\\
+	& = \sum_{k' = 0}^{0} \hat{E}^{(k')}_n \big| \hat{\psi}^{(0-k')}_n \big>\\
+	\Longrightarrow \hat{H}_0 \big| \hat{\psi}^{(0)}_n \big > & = \hat{E}^{(0)}_n \big| \hat{\psi}^{(0)}_n \big>\\
+  \big < \psi_n \big | \underbrace{H_0}_{\mathclap{\text{hermitian}}} \big| \hat{\psi}^{(0)}_n \big > & = \hat{E}^{(0)}_n \big < \psi_n   \big |
+	\hat{\psi}^{(0)}_n\big>
+\end{align*}
+\begin{equation*}
+  \big < \psi_{n'} \big|\hat{H}_0 ^\dag = E_{n'} \big < \psi_{n'} \big |
+\end{equation*}
+\begin{equation*}
+	(E_{n'} - \hat{E}^{(0)}_n)\big < \psi_{n'} \big|\hat{\psi}^{(0)}_n \big > = 0
+\end{equation*}
+So,
+\begin{equation}
+  \hat{E}^{(0)}_n = E_n\,\,\,\text{or}\,\,\,\big < \psi_n \big| \hat{\psi}^{(0)}_n \big > = 0 
+\end{equation}
+\noindent
+If the system $\hat{H}_0$ is nondegenerate: 
+\[ \Longrightarrow \big|\hat{\psi}^{(0)}_n\big> = \big| \psi_n \big >\]
+If the system is degenerate, then:
+\begin{equation*}
+	\hat{H}_0 \big|\psi_{n'} \big > = E_n \big| \psi_{n'} \big >\,\,\,\,\text{for } n' \in \{n, \cdots, n+k\}
+\end{equation*}
+Then:
+\begin{equation*}
+	\big | \hat{\psi}^{(0)}_n \big > = \sum_{k'=0}^{k} C_{n+k'} \big|\psi_{n+k'} \big >
+\end{equation*}
+\begin{equation*}
+	\hat{E}_n = E_n \mathcal{O}(\lambda)
+\end{equation*}
+\begin{equation*}
+	\big | \hat{\psi}_n \big > = | \psi_n\big > + \mathcal{O}(\lambda)
+\end{equation*}
+\begin{equation*}
+\mathcal{O}(\lambda): \hat{H}_0 \big|\hat{\psi}^{(1)}_n \big> + \hat{V} \big|\hat{\psi}^{(0)}_n \big>
+= E_n^{(0)} \big|\hat{\psi}^{(1)}_n \big> + \hat{E}^{(1)}_n  \big|\hat{\psi}^{(0)}_n \big> 
+\end{equation*}
+multiply by $\big<\psi_{n'} \big|$:
+\begin{equation*}
+\big<\psi_{n'} \big|\hat{H}_0 \big|\hat{\psi}^{(1)}_n \big> + \big<\psi_{n'} \big|\hat{V} \big|\hat{\psi}^{(0)}_n \big>
+= E_n^{(0)}\big<\psi_{n'}\big|\hat{\psi}^{(1)}_n \big> + \hat{E}^{(1)}_n \big<\psi_{n'} \big|\hat{\psi}^{(0)}_n \big> 
+\end{equation*}
+\begin{equation*}
+	\big<\psi_{n'} \big|\hat{H}_0 = E_{n'} \big<\psi_{n'} \big|
+\end{equation*}
+$$
+\big|\hat{\psi}^{(0)}_n \big> = \big|\psi_n \big>\,\,\,\,\text{(non-degenerate)},\,\,\,\hat{E}^{(0)}_n = E_n
+$$
+\begin{equation}
+	(E_{n'}-E_n)\big< \psi_{n'} \big|\hat{\psi}^{(1)}_n \big> + \big < \psi_{n'} \big| \hat{V}\big|\psi_n \big>
+	= \hat{E}^{(1)}_n \delta_{n'n}
+\end{equation}
+\textbf{if} $\mathbf{n'= n}$:
+\begin{equation*}
+	\cancelto{0}{(E_{n'}-E_n)} \big< \psi_{n'} \big|\hat{\psi}^{(1)}_n \big> + \big < \psi_{n'} \big| \hat{V}\big|\psi_n \big>
+	= \hat{E}^{(1)}_n \delta_{n'n}
+\end{equation*}
+\begin{align}
+	\Longrightarrow \hat{E}^{(1)}_n & = \big < \psi_{n} \big| \hat{V}\big|\hat{\psi}^{(1)}_n \big>\nonumber\\
+	\hat{E}_n & = E_n + \big < \psi_{n'} \big| \hat{V}\big|\hat{\psi}^{(1)}_n \big> + \mathcal{O}(\lambda^2)\nonumber\\
+	\big | \hat{\psi}_n \big > & = \big| \psi_n \big> + \mathcal{O} (\lambda)
+\end{align}
+\textbf{if} $\mathbf{n'\neq n}$:
+\begin{equation*}
+	(E_{n'}-E_n)\big< \psi_{n'} \big|\hat{\psi}^{(1)}_n \big> = -\big < \psi_{n'} \big| \hat{V}\big|\psi_n \big>
+	+ \hat{E}^{(1)}_n \cancelto{0}{\delta_{n'n}}
+\end{equation*}
+\begin{equation}
+	\big< \psi_{n'} \big|\hat{\psi}^{(1)}_n \big> = \frac{\big < \psi_{n'} \big| \hat{V}\big|\psi_n \big>}{E_n - E_{n'}}
+\end{equation}
+Since $\{ \psi_n\}$ forms an orthonormal basis,
+\begin{equation*}
+	\Longrightarrow \sum_{n'} \big|\psi_{n'} \big> \big< \psi_{n'} \big | = \mathbb{1}\,\,\,\text{Identity matrix}
+\end{equation*}
+\begin{align}
+	\big| \hat{\psi}^{(1)}_n \big > = \mathbb{1} \big|\hat{\psi}^{(1)}_n\big> & = \sum_{n'} \big|\psi_{n'}
+	\big> \big < \psi_{n'} | \hat{\psi}^{(1)}_n \big>\nonumber\\
+	& = \sum_{n'=n} \frac{\big < \psi_{n'} \big| \hat{V}\big|\psi_n \big>}{E_n- E_{n'}} \big|\psi_{n'} \big> 
+\end{align}
+Since $\big |\hat{\psi}^{(0)}_n \big> = \big| \psi_{n} \big>$, then $\big |\hat{\psi}^{(1)}_n \big>$
+cannot depend on $\big|\psi_n\big>$. 
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lecture 2}
+In the previous lecture we defined the perturbed hamiltonian as:
+\sn{$\tilde{H}$: perturbed hamiltonian, $\hat{H}_0$: unperturbed hamiltonian, $\lambda$: bookkeeping parameter,\\ $\hat{V}$: perturbing potential.}
+\ref{eq:1}  as:
+\begin{equation*}
+  \tilde{H} = \hat{H}_0 + \lambda \hat{V}
+\end{equation*}
+\definition{since }
+\noindent
+$\hat{V}$ needs to be smaller than $\hat{H}_0$, $\lambda$ keeps track of this, i.e., dependence on $\hat{V}$.
+\noindent
+\\
+Writing the Schr\"odinger equation:
+\begin{equation*}
+	(\hat{H}_o + \lambda \hat{V}) \hat{\psi}_n = \tilde{E}_n \tilde{\psi}_n
+\end{equation*}
+$\tilde{E}_n$ and $\tilde{\psi}_n$ are eigenenergies and wavefunctions for the perturbated hamiltonian.
+\\
+Expand $\tilde{E}_n$ and $\tilde{\psi}_n$ in power of $\lambda$:
+\begin{align*}
+	\tilde{E}_n & = \hat{E}^{(0)}_n + \lambda \tilde{E}^{(1)}_n + \lambda^2 \tilde{E}^{(2)}_n + \mathcal{O}(\lambda^3)\\
+	\tilde{\psi}_n & = \hat{\psi}^{(0)}_n + \lambda \tilde{\psi}^{(1)}_n + \lambda^2 \tilde{\psi}^{(2)}_n + \mathcal{O}(\lambda^3)
+\end{align*}
+Substitute for $\tilde{E}_0$ and $\tilde{\psi}_n$ into the (SE) and collect terms of like powers of $\lambda$.
+\begin{equation*}
+	\mathcal{O}(1): \hat{H}_0 \big|\tilde{\psi}^{(0)}_n \big> = \tilde{E}^{(0)}_0 \big| \psi_n^{(0)} \big>
+\end{equation*}
+multiply by $\big< \psi_{n'}\big|$:
+\begin{equation*}
+	\big< \psi_{n'}\big|\hat{H}_o \big|\tilde{\psi}^{(0)}_n \big> = \tilde{E}^{(0)}_o \big< \psi_{n'}\big| \psi_n^{(0)} \big>
+\end{equation*}
+$\hat{H}_o = H_o^\dag$ since $\hat{H}_o$ is hermitian.
+\begin{equation*}
+	\big < \psi_{n'} \big| \hat{H}^\dag_o = E_{n'} \big< \psi_{n'} \big|\,\,\,\text{(SE) for } \hat{H}_o
+\end{equation*}
+\begin{equation*}
+	\Longrightarrow E_{n'} \big< \psi_{n'} \big| \psi_n^{(0)} \big> = 
+	\hat{E}^{(0)}_o\big< \psi_{n'} \big| \psi_n^{(0)} \big> 
+\end{equation*}
+$$E^{(0)}_{n'} = E_{n'}\,\,\,\,\text{or}\,\,\,\,\big< \psi_{n'} \big| \psi_n^{(0)} \big> = 0$$
+$\mathbb{1} = \sum_{n'} \big|\psi_{n'}\big> \big< \psi_{n'} \big|$
+\\
+\\
+$\tilde{\psi}_n^{(0)} = \sum_{n'} \big< \psi_{n'} \big| \psi_n^{(1)} \big> $
+\\
+\\
+If $E_n$ is k-level degenerate, then:
+\begin{equation*}
+	\big| \tilde{\psi}^{(0)}_n \big> = \sum_{n'=n}^{n+k-1} \big< \psi_{n'} \big| \psi_n^{(0)} \big>
+	\big|\psi_{n'} \big>
+\end{equation*}
+Consider $\hat{H}_o$ to be nondegenerate: 
+$$
+	\Longrightarrow E^{(0)}_n = E_n,\,\,\,\,\big|\big< \psi_n | \tilde{\psi}^{(0)}_n \big> \big| ^2 = 0
+$$
+$$\sum_{n'=n}^{n+k-1}\big| \big< \psi_{n'} \big| \psi_n^{(0)} \big> \big|^2 = 1$$
+
+Since $ \big< \psi_{n'} \big| \psi_n^{(0)} \big> = 0\,\,\text{for }n'\neq n$:
+$$\Longrightarrow \big| \tilde{\psi}^{(0)}_n \big > = \big| \psi_{n'} \big>$$
+\\
+The $n^{th}$ eigenenergy of the perturbated system (hamiltonian) $\tilde{E}_n$ is the $n^{th}$ 
+eigenenergy of the unperturbed system to Zeroth order in the perturbation, i.e $\mathcal{O}(\lambda^0)
+= \mathcal{O}(1),\,\,\lambda = 0 $.
+\\
+\\
+$\Longleftrightarrow$ If we turn the perturbation off we get the eigenenergy of the unperturbed system.
+\\
+\\
+$\because$ The $n^{th}$ wavefunction for the perturbed hamiltonian $\tilde{\Psi}_n$ is a linear 
+combination of the unperturbed hamiltonian's degenerate wavefunctions with energy $E_n$ to Zeroth
+order in the perturbation, i.e $\mathcal{O}(\lambda^0) = \mathcal{O}(1)\,\,\,\text{or}\,\,\,\lambda = 0$ 
+\begin{equation*}
+	\Longrightarrow \big|\hat{\psi}^{(0)}_n \big> =\sum_{n'=n}^{n+k-1}
+	\big< \psi_{n'} \big|\tilde{ \psi}_n^{(0)} \big> \big|\psi_{n'}\big>
+\end{equation*}
+,where
+$$\sum_{n'=n}^{n+k-1}\big| \big< \psi_{n'} \big| \tilde{\psi}_n^{(0)} \big> \big|^2 = 1$$
+Even if we "turn off" the perturbation, it can still left the degeneracy of $\{\big|\psi_n\big>,
+\cdots, \big|\psi_{n+k-1}\big>\}$ for k-fold degenerate systems, unless the unperturbed wavefunctions
+are eigenstates of the perturbation.\\
+\\
+\textbf{Assuming } $\hat{H}_o$ \textbf{is non-degenerate}
+
+$$\Longrightarrow \big| \big< \psi_{n'} \big| \tilde{\psi}_n^{(0)} \big> \big|^2 = 1$$
+wlog $\psi_n = \tilde{\psi}^{(0)}_n$ (Choice of 1 for phase factor).
+\begin{align*}
+	\tilde{E}_n & = E_n + \mathcal{O}(\lambda)\\
+	\tilde{\psi}_n & = \psi_n + \mathcal{O}(\lambda)
+\end{align*}
+Gather together terms of order 1 in $\lambda$ in the (SE):
+\begin{equation*}
+	\mathcal{O}(\lambda):\lambda \left( \hat{H}_o \big|\tilde{\psi}^{(1)}_n \big> + 
+	\hat{V}\big| \tilde{\psi}^{(0)}_n \right) = 
+	\lambda \left(E_n \big|\tilde{\psi}^{(1)}_n \big> + E^{(1)}_n \big|\psi_n \big> \right)
+\end{equation*}
+Set $\lambda = 1$, 
+\begin{equation*}
+	\hat{H}_o \big|\tilde{\psi}^{(1)}_n \big> + 
+	\hat{V}\big| \tilde{\psi}^{(0)}_n \big> = 
+	E_n \big|\tilde{\psi}^{(1)}_n \big> + E^{(1)}_n \big|\psi_n \big> 
+\end{equation*}
+This is a recursive equation relating the 1st order corrections in $\tilde{E}_n$ and $\tilde{\psi}_n$
+to the Zeroth orde\r corrections, in the unperturbed eigenenergy and wavefunction, $E_n$ and $\psi_n$
+respectively $\because$ the $\mathcal{O}^{th}$ relates the kth order corrections to all previous orders.
+\subsection{Two Unknowns}
+Use the fact that:
+\[\big< \psi_{n'} \big| \psi_n\big> = \delta_{n'n}\,\,\,\,\text{and}\,\,\,\,\hat{H}_o \big|\psi_{n'}
+\big> = E_{n'} \big | \psi_{n'} \big>\]
+To obtain equations for $\tilde{E}^{(1)}_n$ and $\tilde{\psi}^{(1)}_n$.\\
+\\
+multiply by $\big< \psi_{n'} \big|$: 
+\begin{equation*}
+	\big< \psi_{n'} \big|\hat{H}^\dag_o \big|\tilde{\psi}^{(1)}_n \big> + 
+	\big< \psi_{n'} \big|\hat{V}\big| \tilde{\psi}^{(0)}_n \big> = 
+	E_n \big< \psi_{n'} \big|\tilde{\psi}^{(1)}_n \big> + E^{(1)}_n \underbrace{\big< \psi_{n'}
+	\big|\psi_n \big>}_{\delta_{n'n}} 
+\end{equation*}
+\begin{equation}
+	\left(E_{n'} - E_n\right)\big< \psi_{n'} \big|\tilde{\psi}^{(1)}_n \big> +
+	\big< \psi_{n'} \big|\hat{V}\big| \psi_n \big> = \tilde{E}^{(1)}_n \delta_{n'n}
+\end{equation}
+$\big< \psi_{n'} \big|\tilde{\psi}^{(1)}_n \big>  $: Coefficient of $\big|\psi_{n'} \big>$.\\
+\\
+$\tilde{E}^{(1)}_n $: First order correction to the eigenenergy.\\
+\\
+\textbf{If $n'=n$, (2.2.1) yields to:} $\tilde{E}^{{(1)}}_n$ 
+\begin{equation*}
+	\boxed{\tilde{E}^{(1)}_n =	\big< \psi_{n} \big|\hat{V}\big| \psi_n \big>  }
+\end{equation*}
+is the expectation value of the perturbation in the $n^{th}$ eigenstate of the unperturbed hamiltonian.\\
+\\
+\textbf{If $n'\neq n$, (2.2.1) yields to:} coefficients of $\big | \tilde{\psi}^{(1)}_n\big>$ and $\lambda = 1$.
+\begin{equation*}
+	\big < \psi_{n'} |\hat{\psi}^{(1)}_n \big> = \frac{\big< \psi_{n'}\big|\hat{V}\big|\psi_n
+	\big>}{E_n - E_{n'}}
+\end{equation*}
+\begin{equation*}
+	\big|\tilde{\psi}^{(1)}_n \big> = \sum_{n' \neq n}
+	\frac{\big< \psi_{n'}\big|\hat{V}\big|\psi_n\big>}{E_n - E_{n'}}\big|\psi_{n'}\big>
+\end{equation*}
+\begin{equation*}
+	\tilde{E}_n = E_n +\big< \psi_{n}\big|\hat{V}\big|\psi_n\big> + \mathcal{O}(\lambda^2) 
+\end{equation*}
+\begin{equation*}
+	\big| \tilde{\psi}_n \big> = \big| \psi_n \big> +\sum_{n' \neq n}
+	\frac{\big< \psi_{n'}\big|\hat{V}\big|\psi_n\big>}{E_n - E_{n'}}\big|\psi_{n'}\big> + \mathcal{O}(\lambda^2)
+\end{equation*}
+The first order correction to the eigenenergy is the energy of the perturbation of you stay in the
+$n^{th}$ eigenstate of the unperturbed system. So $V$ has to be "weak" so that you can remain in
+$\big|\psi_n\big>$ under its action.\\
+\\
+\textbf{Note:} if $\hat{V}$ (the perturbation) is an odd function,
+\begin{equation*}
+	\Longrightarrow \hat{E}^{(1)}_n = \int d^3 \vec{r}\big|\underbrace{\psi(\vec{r})}_\text{even}
+	\big|^2 \overbrace{\hat{V}(\vec{r}, t)}^\text{odd} = 0
+\end{equation*}
+The first order corrections to wavefunctions are proportional to the matrix elements: 
+$$\big<\psi_{n'}\big|\hat{V}\big|\psi_n\big>,$$
+i.e., that under the action of the perturbation you can transition from $n^{th}$ to $n^{'th}$ 
+eigenstate of the unperturbed hamiltonian and inversely proportional to the difference (energy)
+between the eigenenergies of the $n^{th}$ and $n^{'th}$  eigenstates of the perturbed hamiltonian.\\
+\\
+\textbf{Note:}
+\begin{equation*}
+	\big|\big<\psi_{n'} \big| \hat{V}\big| \psi_n \big> \big| \ll \big|E_n - E_{n'}\big|
+\end{equation*}
+Otherwise our expression for the wavefunctions of the perturbed system won't converge.
+$$	\big|\big<\psi_{n'} \big| \hat{V}\big| \psi_n \big> \big| \ll \big|E_n - E_{n'}\big|$$ 
+for our application of perturbation theory to apply.
+$$\Longrightarrow \lambda \gg 1$$
+\begin{equation*}
+	\mathcal{O}(\lambda ^2): \hat{H}_o \big|\tilde{\psi}^{(2)}_n\big> + \hat{V}\big|\tilde{\psi}^{(1)}_n\big>
+	= E_n \big|\tilde{\psi}^{(2)}_n \big> + \tilde{E}^{(1)}_n \big|\tilde{\psi}^{(1)}_n \big>
+	+ \tilde{E}^{(2)}_n \big| \psi_n \big>
+\end{equation*}
+Multiply by $\big< \psi_{n'} \big|$:
+\begin{equation*}
+	\big< \psi_{n'} \big|\hat{H}_o \big|\tilde{\psi}^{(2)}_n\big> + 
+	\big< \psi_{n'} \big|\hat{V}\big|\tilde{\psi}^{(1)}_n\big>
+	= E_n \big< \psi_{n'} \big|\tilde{\psi}^{(2)}_n \big> + 
+	\tilde{E}^{(1)}_n \big< \psi_{n'} \big|\tilde{\psi}^{(1)}_n \big>
+	+ \tilde{E}^{(2)}_n \big< \psi_{n'} \big| \psi_n \big>	
+\end{equation*}
+\begin{multline*}
+	(E_{n'} - E_n)	\big< \psi_{n'} \big| \hat{\psi}^{(2)}_n \big> + \big<\psi_{n'} \big|
+	\hat{V} \sum_{k\neq n} \frac{\big< \psi_k \big| \hat{V} \big| \psi_n \big>}{E_n - E_k}
+	\big|\psi_k \big>\\
+	= \big<\psi_n \big| \hat{V}\big| \psi_n\big>\big<\psi_{n'}\big|\sum_{n=k}\frac{\big<\psi_k\big|
+	\hat{V}\big|\psi_n\big>}{E_n - E_k}\big|\psi_k\big> + \tilde{E}^{(2)}_n \delta_{n'n} 
+\end{multline*}
+\begin{multline*}
+	(E_{n'} - E_n)	\big< \psi_{n'} \big| \hat{\psi}^{(2)}_n \big> +
+	\sum_{k=n} \frac{\big<\psi_k\big|\hat{V}\big|\psi_n\big>\big<\psi_{n'}\big|\hat{V}\big|\psi_k\big>}
+	{E_n - E_k}\\
+	= \frac{\big<\psi_n\big|\hat{V}\big|\psi_n\big>\big<\psi_{n'}\big|\hat{V}\big|\psi_n\big>}
+	{E_n - E_{n'}}\bigg(1-\delta_{n'n}\bigg) + \tilde{E}^{(2)}_n \delta_{n'n}
+\end{multline*}
+\textbf{If $n' = n$:}
+\begin{equation*}
+	\boxed{\tilde{E}^{(2)}_n = \sum_{k\neq n} \frac{\big|\big<\psi_k\big|\hat{V}\big|\psi_n\big>\big|^2}
+	{E_n - E_k}}
+\end{equation*}
+\textbf{If $n' \neq n$:}
+\begin{equation*}
+	\big<\psi_{n'}\big|\tilde{\psi}^{(2)}_n \big> = \sum_{k\neq n} \frac{\big<\psi_k\big|\hat{V}\big|
+	\psi_n\big>\big<\psi_{n'}\big|\hat{V}\big|\psi_{k}\big>}{(E_n - E_k)(E_n - E_{n'})} + 
+	\frac{\big<\psi_n\big|\hat{V}\big|\psi_n\big>\big<\psi_{n'}\big|\hat{V}\big|\psi_n\big>}
+	{E_n - E_{n'}}
+\end{equation*}
+\begin{equation*}
+	\big|\tilde{\psi}^{(2)}_n \big> = \sum_{n'\neq n} \bigg| \psi_{n'}\bigg> \left[\frac{\big<\psi_{n'}\big|
+	\hat{V}\big|\psi_k\big>\big<\psi_k\big|\hat{V}\big|\psi_n\big>}{(E_n - E_K)(E_n-E_{n'})}
+	+\frac{\big<\psi_{n'}\big|\hat{V}\big|\psi_n\big>\big<\psi_n|\hat{V}\big|\psi_n\big>}
+	{E_n - E_{n'}}\right] 
+\end{equation*}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lecture 3}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
