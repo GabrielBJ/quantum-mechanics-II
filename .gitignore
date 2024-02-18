@@ -7,3 +7,19 @@ alternative-book/Lectures-QM.out
 alternative-book/Lectures-QM.toc
 alternative-book/Lectures-QM.synctex.gz
 
+Book/*.aux
+Book/*.log
+Book/*.fls
+Book/*.fdb_latexmk
+Book/*.out
+Book/*.toc
+Book/*.synctex.gz
+
+Assignments/*.aux
+Assignments/*.log
+Assignments/*.fls
+Assignments/*.fdb_latexmk
+Assignments/*.out
+Assignments/*.toc
+Assignments/*.synctex.gz
+
